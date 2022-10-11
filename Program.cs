@@ -66,6 +66,50 @@ class DataTransformations
             Console.WriteLine(person);
         }
 
+        // Create the query.
+        var minScore50 = (from student in students
+                          where student.Scores.Min() < 50
+                          select student.Last);
+
+        Console.WriteLine("The following students has a minimum score of <50:");
+        // Execute the query.
+        foreach (var person in minScore50)
+        {
+            Console.WriteLine(person);
+        }
+
+        // Create the query.
+        var lastNameO = (from student in students
+                         where student.Last[0] == 'O'
+                         select student.Last);
+
+        Console.WriteLine("The following students has a lastname starting with 'O':");
+        // Execute the query.
+        foreach (var person in lastNameO)
+        {
+            Console.WriteLine(person);
+        }
+
+        var ascentdingStudents = from student in students
+                                                orderby student.First ascending
+                                                select student.First;
+        Console.WriteLine("Listing all students in ascending order (based on first name):");
+        // Execute the query.
+        foreach (var person in ascentdingStudents)
+        {
+            Console.WriteLine(person);
+        }
+
+        var descendingStudents = from student in students
+                                     orderby student.First descending
+                                     select student.First;
+        Console.WriteLine("Listing all students in descending order (based on first name):");
+        // Execute the query.
+        foreach (var person in descendingStudents)
+        {
+            Console.WriteLine(person);
+        }
+
         Console.WriteLine("Press any key to exit.");
         Console.ReadKey();
     }
